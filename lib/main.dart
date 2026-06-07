@@ -17,7 +17,7 @@ class HaramainOSApp extends StatelessWidget {
       title: 'HaramainOS',
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
-      initialRoute: AppRoutes.group,
+      initialRoute: AppRoutes.booking,
       getPages: AppPages.routes,
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
     );

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:haramain_os/modules/bookings/booking_binding.dart';
+import 'package:haramain_os/modules/bookings/booking_view.dart';
 
 import '../modules/groups/group_binding.dart';
 import '../modules/groups/group_view.dart';
@@ -10,6 +12,14 @@ class AppPages {
       name: AppRoutes.group,
       page: () => const GroupView(),
       binding: GroupBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.booking,
+
+      page: () => const BookingView(),
+
+      binding: BookingBinding(),
     ),
   ];
 }
