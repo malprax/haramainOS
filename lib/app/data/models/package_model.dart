@@ -16,8 +16,10 @@ class PackageModel {
   DateTime? returnDate;
 
   String? makkahHotel;
+  int? makkahHotelStars;
 
   String? madinahHotel;
+  int? madinahHotelStars;
 
   String? guideId;
 
@@ -33,7 +35,9 @@ class PackageModel {
     this.departureDate,
     this.returnDate,
     this.makkahHotel,
+    this.makkahHotelStars,
     this.madinahHotel,
+    this.madinahHotelStars,
     this.guideId,
     this.isActive,
   });
@@ -53,7 +57,9 @@ class PackageModel {
           ? null
           : DateTime.parse(json['returnDate']),
       makkahHotel: json['makkahHotel'],
+      makkahHotelStars: json['makkahHotelStars'],
       madinahHotel: json['madinahHotel'],
+      madinahHotelStars: json['madinahHotelStars'],
       guideId: json['guideId'],
       isActive: json['isActive'],
     );
@@ -70,7 +76,9 @@ class PackageModel {
       'departureDate': departureDate?.toIso8601String(),
       'returnDate': returnDate?.toIso8601String(),
       'makkahHotel': makkahHotel,
+      'makkahHotelStars': makkahHotelStars,
       'madinahHotel': madinahHotel,
+      'madinahHotelStars': madinahHotelStars,
       'guideId': guideId,
       'isActive': isActive,
     };

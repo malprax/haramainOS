@@ -1,48 +1,34 @@
 import 'package:get/get.dart';
-
-import '../../data/models/booking_model.dart';
-import '../../data/models/package_model.dart';
-import '../../data/repositories/booking_repository.dart';
+import 'package:haramain_os/app/data/models/booking_model.dart';
+import 'package:haramain_os/app/data/models/package_model.dart';
+import 'package:haramain_os/app/data/repositories/booking_repository.dart';
 
 class BookingController extends GetxController {
-  final BookingRepository _repository = BookingRepository();
+  final BookingRepository _bookingRepository = BookingRepository();
 
   final isLoading = false.obs;
 
-  final selectedPackage = Rxn<PackageModel>();
   final bookings = <BookingModel>[].obs;
+  final selectedPackage = Rxn<PackageModel>();
 
   @override
   void onInit() {
     super.onInit();
-    createSamplePackage();
-    loadBookings();
+
+    final argument = Get.arguments;
+
+    if (argument is PackageModel) {
+      selectedPackage.value = argument;
+    }
+
+    loadData();
   }
 
-  void createSamplePackage() {
-    final now = DateTime.now();
-
-    selectedPackage.value = PackageModel(
-      id: 'package-umrah-september-2026',
-      packageName: 'Umrah Reguler September 2026',
-      durationDays: 9,
-      capacity: 45,
-      bookedSeats: 0,
-      price: 28500000,
-      departureDate: DateTime(2026, 9, 12),
-      returnDate: DateTime(2026, 9, 21),
-      makkahHotel: 'Anjum Hotel Makkah',
-      madinahHotel: 'Pullman Zamzam Madinah',
-      guideId: 'guide-ustadz-ahmad',
-      isActive: true,
-    );
-  }
-
-  Future<void> loadBookings() async {
+  Future<void> loadData() async {
     isLoading.value = true;
 
     try {
-      bookings.value = await _repository.getBookings();
+      bookings.value = await _bookingRepository.getBookings();
     } finally {
       isLoading.value = false;
     }
@@ -52,19 +38,33 @@ class BookingController extends GetxController {
     return bookings.firstWhereOrNull(
       (booking) =>
           booking.packageId == selectedPackage.value?.id &&
-          booking.seatNumber == seatNumber &&
-          booking.status != BookingStatus.rejected,
+          booking.seatNumber == seatNumber,
     );
   }
 
-  Future<void> bookSeat(int seatNumber) async {
+  Future<void> bookSeatByJamaah(int seatNumber) async {
     final package = selectedPackage.value;
-    if (package == null) return;
+
+    if (package == null || package.id == null) {
+      Get.snackbar(
+        'Paket belum dipilih',
+        'Silakan pilih paket terlebih dahulu',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
 
     final existingBooking = getBookingBySeat(seatNumber);
-    if (existingBooking != null) return;
 
-    final now = DateTime.now();
+    if (existingBooking != null &&
+        existingBooking.status != BookingStatus.rejected) {
+      Get.snackbar(
+        'Seat tidak tersedia',
+        'Seat ini sudah dipilih jamaah lain',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
 
     final booking = BookingModel(
       id: 'booking-${package.id}-$seatNumber',
@@ -72,61 +72,99 @@ class BookingController extends GetxController {
       jamaahId: 'jamaah-demo',
       seatNumber: seatNumber,
       status: BookingStatus.pending,
-      bookingDate: now,
+      bookingDate: DateTime.now(),
     );
 
-    await _repository.createBooking(booking);
-    await loadBookings();
+    if (existingBooking != null &&
+        existingBooking.status == BookingStatus.rejected &&
+        existingBooking.id != null) {
+      await _bookingRepository.deleteBooking(existingBooking.id!);
+    }
+
+    await _bookingRepository.createBooking(booking);
+    await loadData();
   }
 
   Future<void> approveBooking(BookingModel booking) async {
-    final updatedBooking = BookingModel(
-      id: booking.id,
-      packageId: booking.packageId,
-      jamaahId: booking.jamaahId,
-      seatNumber: booking.seatNumber,
-      status: BookingStatus.approved,
-      bookingDate: booking.bookingDate,
+    await _bookingRepository.updateBooking(
+      BookingModel(
+        id: booking.id,
+        packageId: booking.packageId,
+        jamaahId: booking.jamaahId,
+        seatNumber: booking.seatNumber,
+        status: BookingStatus.approved,
+        bookingDate: booking.bookingDate,
+      ),
     );
 
-    await _repository.updateBooking(updatedBooking);
-    await loadBookings();
+    await loadData();
   }
 
-  Future<void> rejectBooking(BookingModel booking) async {
-    final updatedBooking = BookingModel(
-      id: booking.id,
-      packageId: booking.packageId,
-      jamaahId: booking.jamaahId,
-      seatNumber: booking.seatNumber,
-      status: BookingStatus.rejected,
-      bookingDate: booking.bookingDate,
+  Future<void> cancelBooking(BookingModel booking) async {
+    await _bookingRepository.updateBooking(
+      BookingModel(
+        id: booking.id,
+        packageId: booking.packageId,
+        jamaahId: booking.jamaahId,
+        seatNumber: booking.seatNumber,
+        status: BookingStatus.rejected,
+        bookingDate: booking.bookingDate,
+      ),
     );
 
-    await _repository.updateBooking(updatedBooking);
-    await loadBookings();
+    await loadData();
   }
 
-  int get approvedCount {
+  Future<void> resetBooking(BookingModel booking) async {
+    if (booking.id == null) {
+      return;
+    }
+
+    await _bookingRepository.deleteBooking(booking.id!);
+    await loadData();
+  }
+
+  int approvedCountBySelectedPackage() {
+    final packageId = selectedPackage.value?.id ?? '';
+
     return bookings
-        .where((item) => item.status == BookingStatus.approved)
+        .where(
+          (item) =>
+              item.packageId == packageId &&
+              item.status == BookingStatus.approved,
+        )
         .length;
   }
 
-  int get pendingCount {
+  int pendingCountBySelectedPackage() {
+    final packageId = selectedPackage.value?.id ?? '';
+
     return bookings
-        .where((item) => item.status == BookingStatus.pending)
+        .where(
+          (item) =>
+              item.packageId == packageId &&
+              item.status == BookingStatus.pending,
+        )
         .length;
   }
 
-  int get rejectedCount {
+  int rejectedCountBySelectedPackage() {
+    final packageId = selectedPackage.value?.id ?? '';
+
     return bookings
-        .where((item) => item.status == BookingStatus.rejected)
+        .where(
+          (item) =>
+              item.packageId == packageId &&
+              item.status == BookingStatus.rejected,
+        )
         .length;
   }
 
-  int get availableCount {
+  int availableCountBySelectedPackage() {
     final capacity = selectedPackage.value?.capacity ?? 0;
-    return capacity - approvedCount - pendingCount;
+
+    return capacity -
+        approvedCountBySelectedPackage() -
+        pendingCountBySelectedPackage();
   }
 }

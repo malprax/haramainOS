@@ -1,27 +1,40 @@
-// Role super_admin, travel_admin, mutawwif, jamaah
+enum UserRole { adminTravel, jamaah }
+
 class UserModel {
   final String id;
-  final String name;
+  final String fullName;
   final String email;
-  final String role;
+  final String password;
+  final UserRole role;
 
   UserModel({
     required this.id,
-    required this.name,
+    required this.fullName,
     required this.email,
+    required this.password,
     required this.role,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      email: json['email'] as String,
-      role: json['role'] as String,
+      id: json['id'] ?? '',
+      fullName: json['fullName'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      role: UserRole.values.firstWhere(
+        (item) => item.name == json['role'],
+        orElse: () => UserRole.jamaah,
+      ),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'email': email, 'role': role};
+    return {
+      'id': id,
+      'fullName': fullName,
+      'email': email,
+      'password': password,
+      'role': role.name,
+    };
   }
 }
