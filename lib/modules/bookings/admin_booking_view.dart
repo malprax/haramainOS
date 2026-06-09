@@ -21,11 +21,9 @@ class AdminBookingView extends GetView<BookingController> {
           return const Center(child: Text('Paket belum dipilih.'));
         }
 
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         final capacity = package.capacity ?? 0;
+        final packageId = package.id?.toString().trim();
+        final bookingSnapshot = controller.bookings.toList();
 
         return ListView(
           padding: const EdgeInsets.all(16),
@@ -34,9 +32,15 @@ class AdminBookingView extends GetView<BookingController> {
               package.packageName ?? '-',
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+
+            const SizedBox(height: 4),
+
             Text('Kapasitas: $capacity jamaah'),
+
             const SizedBox(height: 16),
+
             const _SeatLegend(),
+
             const SizedBox(height: 20),
 
             GridView.builder(
@@ -50,9 +54,19 @@ class AdminBookingView extends GetView<BookingController> {
               ),
               itemBuilder: (context, index) {
                 final seatNumber = index + 1;
-                final booking = controller.getBookingBySeat(seatNumber);
+
+                final booking = bookingSnapshot.firstWhereOrNull(
+                  (item) =>
+                      item.packageId?.toString().trim() == packageId &&
+                      item.seatNumber == seatNumber,
+                );
+
+                final status = booking?.status ?? BookingStatus.available;
 
                 return _SeatBox(
+                  key: ValueKey(
+                    'admin-seat-$seatNumber-${status.name}-${booking?.id ?? 'empty'}',
+                  ),
                   seatNumber: seatNumber,
                   booking: booking,
                   onTap: () {
@@ -82,7 +96,7 @@ class AdminBookingView extends GetView<BookingController> {
           content: Text(
             status == BookingStatus.available
                 ? 'Seat ini masih kosong. Menunggu jamaah melakukan booking.'
-                : 'Status booking: ${status.name}',
+                : 'Status booking: ${_statusLabel(status)}',
           ),
           actions: [
             if (status == BookingStatus.available)
@@ -145,6 +159,19 @@ class AdminBookingView extends GetView<BookingController> {
       },
     );
   }
+
+  String _statusLabel(BookingStatus status) {
+    switch (status) {
+      case BookingStatus.available:
+        return 'Kosong';
+      case BookingStatus.pending:
+        return 'Pending';
+      case BookingStatus.approved:
+        return 'Approved';
+      case BookingStatus.rejected:
+        return 'Dibatalkan';
+    }
+  }
 }
 
 class _SeatLegend extends StatelessWidget {
@@ -171,6 +198,7 @@ class _SeatBox extends StatelessWidget {
   final VoidCallback onTap;
 
   const _SeatBox({
+    super.key,
     required this.seatNumber,
     required this.booking,
     required this.onTap,
@@ -183,7 +211,8 @@ class _SeatBox extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
         decoration: BoxDecoration(
           color: _getColor(status),
           border: Border.all(color: Colors.black26),

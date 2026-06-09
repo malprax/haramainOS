@@ -65,3 +65,98 @@ Admin
 ├─ Assign Bus
 ├─ Assign Hotel
 └─ Assign Mutawwif
+
+
+Tahap 1 — Booking Seat Jamaah
+
+Saat ini jamaah sudah bisa melihat paket.
+
+Target berikut:
+
+⬜ Jamaah klik paket
+⬜ Muncul kotak seat sesuai kapasitas
+⬜ Klik seat kosong → booking
+⬜ Seat berubah putih ➜ kuning (pending)
+⬜ Nama jamaah tersimpan di booking
+
+⸻
+
+Tahap 2 — Approval Admin
+
+Admin buka Kelola Booking
+
+⬜ Seat kuning tampil nama jamaah
+⬜ Tombol Approve
+⬜ Tombol Tolak
+⬜ Tombol Reset
+
+Status:
+
+🟨 Pending
+🟩 Approved
+🟥 Rejected
+⬜ Kosong
+
+⸻
+
+Tahap 3 — Dashboard Jamaah
+
+Setelah booking berhasil:
+
+Daripada muncul tombol “Beli Paket”, tampilkan:
+
+Tahap 4 — Sinkronisasi Real Time Supabase
+
+Agar admin dan jamaah melihat perubahan langsung tanpa refresh:
+
+
+Menurut saya sekarang jangan lompat dulu ke:
+
+* Tracking GPS
+* Checklist Umrah
+* Manasik
+* Broadcast
+
+Karena modul Booking Paket + Seat + Approval adalah jantung bisnis travel. Kalau modul ini selesai 100%, baru fitur lain tinggal pelengkap.
+
+Saya sarankan berikutnya kita selesaikan seat booking jamaah → pending → approve admin → muncul di dashboard jamaah sampai benar-benar beres.
+
+
+
+HAKI #1
+
+Travel CMS Umrah dan Haji Berbasis Flutter Web dan Mobile
+
+⸻
+
+HAKI #2
+
+Smart Seat Booking Management untuk Travel Umrah
+
+⸻
+
+HAKI #3
+
+Realtime Visual Seat Status Engine Berbasis GetX dan Supabase
+
+⸻
+
+Jika target artikel ilmiah
+
+Saya melihat paling kuat:
+
+Artikel 1
+
+Implementasi Sistem Booking Seat Visual untuk Travel Umrah Berbasis Flutter
+
+⸻
+
+Artikel 2
+
+Evaluasi Metode Polling Realtime pada Sistem Reservasi Multi User Menggunakan Supabase
+
+⸻
+
+Artikel 3
+
+Desain Dashboard Adaptif untuk Pengelolaan Jamaah Umrah Digita

@@ -36,10 +36,6 @@ class AuthController extends GetxController {
       final email = emailController.text.trim().toLowerCase();
       final password = passwordController.text.trim();
 
-      debugPrint('REGISTER JAMAAH START');
-      debugPrint('FULLNAME: $fullName');
-      debugPrint('EMAIL: $email');
-
       if (fullName.isEmpty || email.isEmpty || password.isEmpty) {
         Get.snackbar(
           'Gagal',
@@ -83,18 +79,18 @@ class AuthController extends GetxController {
       }
 
       final user = UserModel(
-        id: 'jamaah-${DateTime.now().microsecondsSinceEpoch}',
+        id: '',
         fullName: fullName,
         email: email,
         password: password,
         role: UserRole.jamaah,
+        avatar: null,
+        phoneNumber: null,
+        verified: false,
+        emailVisibility: true,
       );
 
-      debugPrint('USER TO CREATE: ${user.toJson()}');
-
       await _repository.createUser(user);
-
-      debugPrint('JAMAAH CREATED');
 
       Get.snackbar(
         'Berhasil',
@@ -138,20 +134,7 @@ class AuthController extends GetxController {
         return;
       }
 
-      final users = await _repository.getUsers();
-
-      debugPrint('TOTAL USERS: ${users.length}');
-
-      for (final user in users) {
-        debugPrint(
-          'USER => ${user.email} | ${user.password} | ${user.role} | ${user.fullName}',
-        );
-      }
-
-      final user = users.firstWhereOrNull(
-        (item) =>
-            item.email.toLowerCase() == email && item.password == password,
-      );
+      final user = await _repository.login(email: email, password: password);
 
       if (user == null) {
         Get.snackbar(
@@ -163,6 +146,8 @@ class AuthController extends GetxController {
       }
 
       currentUser.value = user;
+      debugPrint('LOGIN ROLE FINAL: ${user.role}');
+      debugPrint('LOGIN ROLE NAME: ${user.role.name}');
 
       emailController.clear();
       passwordController.clear();
@@ -186,6 +171,8 @@ class AuthController extends GetxController {
   }
 
   Future<void> logout() async {
+    await _repository.logout();
+
     currentUser.value = null;
 
     fullNameController.clear();

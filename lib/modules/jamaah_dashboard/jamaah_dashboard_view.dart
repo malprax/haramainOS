@@ -9,10 +9,39 @@ class JamaahDashboardView extends StatelessWidget {
 
   final AuthController authController = Get.find<AuthController>();
 
+  void _showLogoutDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Logout'),
+        content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Tidak')),
+          ElevatedButton(
+            onPressed: () {
+              Get.back();
+              authController.currentUser.value = null;
+              Get.offAllNamed(AppRoutes.auth);
+            },
+            child: const Text('Ya'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard Jamaah'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Dashboard Jamaah'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _showLogoutDialog(),
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

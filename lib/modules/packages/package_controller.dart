@@ -38,10 +38,13 @@ class PackageController extends GetxController {
     isLoading.value = true;
 
     try {
-      packages.value = await _packageRepository.getPackages();
+      packages.assignAll(await _packageRepository.getPackages());
+      packages.refresh();
+
       debugPrint('TOTAL PACKAGE: ${packages.length}');
     } catch (error) {
       debugPrint('LOAD PACKAGE ERROR: $error');
+
       Get.snackbar(
         'Gagal memuat paket',
         error.toString(),
@@ -54,9 +57,13 @@ class PackageController extends GetxController {
 
   Future<void> loadPackages() async {
     try {
-      packages.value = await _packageRepository.getPackages();
+      packages.assignAll(await _packageRepository.getPackages());
+      packages.refresh();
+
+      debugPrint('TOTAL PACKAGE: ${packages.length}');
     } catch (error) {
       debugPrint('LOAD PACKAGE ERROR: $error');
+
       Get.snackbar(
         'Gagal memuat paket',
         error.toString(),
@@ -232,7 +239,11 @@ class PackageController extends GetxController {
       final madinahStars = selectedMadinahHotelStars.value;
 
       if (packageName.isEmpty) {
-        Get.snackbar('Gagal', 'Nama paket wajib diisi');
+        Get.snackbar(
+          'Gagal',
+          'Nama paket wajib diisi',
+          snackPosition: SnackPosition.BOTTOM,
+        );
         return;
       }
 
@@ -319,9 +330,7 @@ class PackageController extends GetxController {
       }
 
       final package = PackageModel(
-        id:
-            editingPackage?.id ??
-            DateTime.now().microsecondsSinceEpoch.toString(),
+        id: editingPackage?.id,
         packageName: packageName,
         durationDays: durationDays,
         capacity: fixedCapacity,
@@ -360,6 +369,7 @@ class PackageController extends GetxController {
       });
     } catch (error) {
       debugPrint('SAVE PACKAGE ERROR: $error');
+
       Get.snackbar(
         'Gagal menyimpan paket',
         error.toString(),
@@ -371,7 +381,7 @@ class PackageController extends GetxController {
   }
 
   Future<void> deletePackage(PackageModel package) async {
-    if (package.id == null) return;
+    if (package.id == null || package.id!.isEmpty) return;
 
     try {
       await _packageRepository.deletePackage(package.id!);
@@ -384,6 +394,7 @@ class PackageController extends GetxController {
       );
     } catch (error) {
       debugPrint('DELETE PACKAGE ERROR: $error');
+
       Get.snackbar(
         'Gagal menghapus paket',
         error.toString(),
@@ -393,7 +404,7 @@ class PackageController extends GetxController {
   }
 
   void openAdminBooking(PackageModel package) {
-    if (package.id == null) {
+    if (package.id == null || package.id!.isEmpty) {
       Get.snackbar(
         'Paket belum dipilih',
         'Silakan pilih paket terlebih dahulu',
@@ -406,7 +417,7 @@ class PackageController extends GetxController {
   }
 
   void openJamaahBooking(PackageModel package) {
-    if (package.id == null) {
+    if (package.id == null || package.id!.isEmpty) {
       Get.snackbar(
         'Paket belum dipilih',
         'Silakan pilih paket terlebih dahulu',

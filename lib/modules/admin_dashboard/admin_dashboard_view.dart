@@ -8,6 +8,25 @@ class AdminDashboardView extends StatelessWidget {
   AdminDashboardView({super.key});
 
   final AuthController authController = Get.find<AuthController>();
+  void _showLogoutDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Logout'),
+        content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Tidak')),
+          ElevatedButton(
+            onPressed: () {
+              Get.back();
+              authController.currentUser.value = null;
+              Get.offAllNamed(AppRoutes.auth);
+            },
+            child: const Text('Ya'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,26 +108,6 @@ class AdminDashboardView extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () => Get.toNamed(AppRoutes.adminPackages),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showLogoutDialog() {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Tidak')),
-          ElevatedButton(
-            onPressed: () {
-              Get.back();
-              authController.currentUser.value = null;
-              Get.offAllNamed(AppRoutes.auth);
-            },
-            child: const Text('Ya'),
           ),
         ],
       ),
