@@ -168,13 +168,13 @@ class JamaahBookingView extends GetView<BookingController> {
   String _statusLabel(BookingStatus status) {
     switch (status) {
       case BookingStatus.available:
-        return 'Kosong';
+        return 'Empty';
       case BookingStatus.pending:
         return 'Pending';
       case BookingStatus.approved:
         return 'Approved';
       case BookingStatus.rejected:
-        return 'Dibatalkan';
+        return 'Rejected';
     }
   }
 }
@@ -188,10 +188,10 @@ class _SeatLegend extends StatelessWidget {
       spacing: 12,
       runSpacing: 8,
       children: [
-        _LegendBox(color: Colors.white, label: 'Kosong'),
+        _LegendBox(color: Colors.white, label: 'Empty'),
         _LegendBox(color: Colors.amber, label: 'Pending'),
         _LegendBox(color: Colors.green, label: 'Approved'),
-        _LegendBox(color: Colors.redAccent, label: 'Dibatalkan'),
+        _LegendBox(color: Colors.redAccent, label: 'Rejected'),
       ],
     );
   }

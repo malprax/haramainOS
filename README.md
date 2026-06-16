@@ -12,151 +12,142 @@ Travel
 ├── Souvenir
 └── Lokasi Jamaah
 
-HAKI 1
-
-HaramainOS Smart Jamaah Tracker
-
 Artikel 1
 
-Title
+judul IMPLEMENTATION OF A REAL-TIME VISUAL SEAT BOOKING SYSTEM FOR UMRAH TRAVEL USING FLUTTER
 
-Design and Implementation of Smart Jamaah Tracker for Umrah and Hajj Pilgrim Monitoring Using Flutter Mobile Application
+Fokus Penelitian Pengembangan dan implementasi sistem reservasi kursi jamaah umrah secara visual dan real-time.
 
-Novelty:
-Real-time pilgrim monitoring
-Last known location
-Status tracking
+Objek yang Diteliti
 
-HAKI 2
+* Seat layout
+* Reservasi kursi
+* Sinkronisasi status kursi
+* Interaksi pengguna
 
-HaramainOS Smart Group Manager
+Pertanyaan Penelitian
 
-Artikel 2
+Bagaimana mengimplementasikan sistem pemilihan kursi jamaah secara visual yang mampu memperbarui status kursi secara real-time?
 
-Title
+Yang Dibahas
 
-Development of Smart Group Manager for Managing Pilgrim Groups in Umrah and Hajj Travel Services
+* Flutter
+* PocketBase/Supabase
+* Real-time update
+* Seat selection
+* Booking conflict prevention
 
-Novelty:
-Group management
-Bus allocation
-Room allocation
-Mutawwif assignment
+Hasil yang Ditunjukkan
 
-HAKI 3
+* Tampilan kursi
+* Kecepatan update kursi
+* Pengujian multi-user
+* Konflik reservasi
 
-HaramainOS Emergency Jamaah Button
+Kata Kunci
 
-Artikel 3
-
-Title
-
-Mobile-Based Emergency Reporting System for Enhancing Pilgrim Safety During Umrah and Hajj Activities
-
-Novelty:
-Emergency button
-Location sharing
-Incident reporting
-Emergency response workflow
-
-Admin
-├─ Add Group
-├─ Add Jamaah
-├─ Assign Bus
-├─ Assign Hotel
-└─ Assign Mutawwif
-
-
-Tahap 1 — Booking Seat Jamaah
-
-Saat ini jamaah sudah bisa melihat paket.
-
-Target berikut:
-
-⬜ Jamaah klik paket
-⬜ Muncul kotak seat sesuai kapasitas
-⬜ Klik seat kosong → booking
-⬜ Seat berubah putih ➜ kuning (pending)
-⬜ Nama jamaah tersimpan di booking
-
-⸻
-
-Tahap 2 — Approval Admin
-
-Admin buka Kelola Booking
-
-⬜ Seat kuning tampil nama jamaah
-⬜ Tombol Approve
-⬜ Tombol Tolak
-⬜ Tombol Reset
-
-Status:
-
-🟨 Pending
-🟩 Approved
-🟥 Rejected
-⬜ Kosong
-
-⸻
-
-Tahap 3 — Dashboard Jamaah
-
-Setelah booking berhasil:
-
-Daripada muncul tombol “Beli Paket”, tampilkan:
-
-Tahap 4 — Sinkronisasi Real Time Supabase
-
-Agar admin dan jamaah melihat perubahan langsung tanpa refresh:
-
-
-Menurut saya sekarang jangan lompat dulu ke:
-
-* Tracking GPS
-* Checklist Umrah
-* Manasik
-* Broadcast
-
-Karena modul Booking Paket + Seat + Approval adalah jantung bisnis travel. Kalau modul ini selesai 100%, baru fitur lain tinggal pelengkap.
-
-Saya sarankan berikutnya kita selesaikan seat booking jamaah → pending → approve admin → muncul di dashboard jamaah sampai benar-benar beres.
-
-
-
-HAKI #1
-
-Travel CMS Umrah dan Haji Berbasis Flutter Web dan Mobile
-
-⸻
-
-HAKI #2
-
-Smart Seat Booking Management untuk Travel Umrah
-
-⸻
-
-HAKI #3
-
-Realtime Visual Seat Status Engine Berbasis GetX dan Supabase
-
-⸻
-
-Jika target artikel ilmiah
-
-Saya melihat paling kuat:
-
-Artikel 1
-
-Implementasi Sistem Booking Seat Visual untuk Travel Umrah Berbasis Flutter
+Flutter, Real-Time Booking, Seat Reservation, Umrah Travel, Visual Interface
 
 ⸻
 
 Artikel 2
 
-Evaluasi Metode Polling Realtime pada Sistem Reservasi Multi User Menggunakan Supabase
+DESIGN OF AN ADAPTIVE DASHBOARD FOR DIGITAL UMRAH PILGRIM MANAGEMENT
+
+Fokus Penelitian
+
+Perancangan dashboard untuk monitoring operasional jamaah umrah.
+
+Objek yang Diteliti
+
+* Data jamaah
+* Status pembayaran
+* Status keberangkatan
+* Statistik operasional
+
+Pertanyaan Penelitian
+
+Bagaimana merancang dashboard yang mampu menyajikan informasi jamaah secara efektif pada berbagai ukuran perangkat?
+
+Yang Dibahas
+
+* Adaptive UI
+* Responsive Design
+* Information Architecture
+* Data Visualization
+* User Experience
+
+Hasil yang Ditunjukkan
+
+* Dashboard Desktop
+* Dashboard Tablet
+* Dashboard Mobile
+* Evaluasi usability
+
+Kata Kunci
+
+Adaptive Dashboard, Data Visualization, Responsive Design, Umrah Management, User Experience
 
 ⸻
 
 Artikel 3
 
-Desain Dashboard Adaptif untuk Pengelolaan Jamaah Umrah Digita
+DEVELOPMENT OF A MULTI-ROLE CONTENT MANAGEMENT SYSTEM FOR UMRAH TRAVEL OPERATIONS
+
+Fokus Penelitian
+
+Pengembangan CMS untuk mengelola seluruh proses bisnis travel umrah.
+
+Objek yang Diteliti
+
+* Data jamaah
+* Paket umrah
+* Dokumen
+* Pembayaran
+* Reservasi
+* Hak akses pengguna
+
+Pertanyaan Penelitian
+
+Bagaimana membangun sistem terintegrasi yang mampu mengelola operasional travel umrah melalui mekanisme multi-role?
+
+Yang Dibahas
+
+* Role Management
+* CMS Architecture
+* Workflow Travel
+* Access Control
+* Integrated Information System
+
+Hasil yang Ditunjukkan
+
+* Modul Jamaah
+* Modul Paket
+* Modul Pembayaran
+* Modul Reservasi
+* Modul Dokumen
+
+Kata Kunci
+
+Content Management System, Multi-Role System, Travel Management, Information System, Umrah Travel
+
+
+Artikel 1 (Booking Seat)
+
+* 10 referensi Flutter
+* 10 referensi real-time synchronization
+* 5 referensi reservation system
+* 5 referensi mobile information system
+
+Artikel 2 (Dashboard)
+
+* 15 referensi dashboard & visualization
+* 10 referensi responsive/adaptive UI
+* 5 referensi information systems
+
+Artikel 3 (CMS Travel)
+
+* 15 referensi CMS
+* 10 referensi role-based access control
+* 5 referensi travel information systems
+
