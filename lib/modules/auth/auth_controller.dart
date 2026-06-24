@@ -17,11 +17,6 @@ class AuthController extends GetxController {
 
   final currentUser = Rxn<UserModel>();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   void toggleMode() {
     isLoginMode.value = !isLoginMode.value;
   }
