@@ -609,4 +609,232 @@ Kalau melihat posisi proyek sekarang, saya akan mulai membangun Group Management
 7. Financial Safety Engine ⭐⭐⭐⭐⭐
 8. Panic Button ⭐⭐⭐⭐
 9. Community Intelligence ⭐⭐⭐⭐
-10. Alumni & Referral ⭐⭐⭐⭐
+10. Alumni & Referral 
+
+Setuju sekali kawan. Bahkan menurut saya Security & Compliance harus menjadi salah satu pilar utama HaramainOS, sejajar dengan Booking, Family, dan Group Management.
+
+Saya akan revisi roadmap besarnya menjadi seperti ini.
+
+⸻
+
+PHASE 1 — Core Travel Operation (Sedang Berjalan)
+
+✅ Authentication
+
+✅ Package Management
+
+✅ Booking Seat
+
+✅ Booking Approval
+
+✅ Document Checklist
+
+✅ Notification
+
+✅ Family Management
+
+🔄 Group Management
+
+🔄 Room Allocation
+
+🔄 Bus Allocation
+
+🔄 Mutawwif Assignment
+
+⸻
+
+PHASE 2 — Smart Automation
+
+* Auto Room Allocation
+* Auto Bus Allocation
+* Auto Grouping
+* Auto Family Detection
+* Waiting List
+* Seat Optimization
+* Manifest Generator
+* Smart Itinerary
+* Smart Reminder
+* WhatsApp Broadcast Targeted
+
+⸻
+
+PHASE 3 — Financial Management
+
+* Pembayaran Jamaah
+* Cicilan
+* Invoice
+* Kwitansi
+* Cash Flow
+* Hutang Piutang
+* Vendor Payment
+* Laba Rugi
+* Neraca
+* Rekonsiliasi Bank
+* Financial Dashboard
+
+Ini yang akan membantu travel menghindari masalah pencampuran uang pribadi dan uang perusahaan.
+
+⸻
+
+PHASE 4 — Security & Compliance ⭐
+
+Ini kita jadikan modul besar tersendiri.
+
+Identity & Access
+
+* Role Based Access Control (RBAC)
+* Permission Management
+* Route Guard
+* Multi-level Admin
+* Session Management
+
+⸻
+
+Database Security
+
+* PocketBase API Rules
+* Multi Tenant (travelId)
+* Row Level Access
+* Record Ownership
+* Soft Delete
+* Restore Data
+
+⸻
+
+Document Security
+
+* Private File Storage
+* Secure Download URL
+* Expiring URL
+* Watermark Dokumen
+* Audit Download
+
+⸻
+
+Authentication Security
+
+* JWT Validation
+* Refresh Token
+* Auto Logout
+* Login History
+* Device Management
+
+⸻
+
+Audit System
+
+Collection:
+
+audit_logs
+
+Mencatat:
+
+* Login
+* Logout
+* CRUD Data
+* Approval
+* Reject
+* Delete
+* Export
+* Download
+
+Sehingga semua aktivitas dapat ditelusuri.
+
+⸻
+
+Backup System
+
+* Auto Backup Database
+* Auto Backup File
+* Restore
+* Snapshot
+* Disaster Recovery
+
+⸻
+
+Encryption
+
+* Password Hash
+* Sensitive Field Encryption
+* Secure Environment Variable
+* API Secret Management
+
+⸻
+
+Monitoring
+
+* Error Log
+* Performance Monitor
+* Activity Dashboard
+* Storage Usage
+* API Usage
+
+⸻
+
+PHASE 5 — CRM & Marketing
+
+* Broadcast WhatsApp
+* Broadcast Email
+* Broadcast Push Notification
+* Alumni Management
+* Referral System
+* Loyalty Program
+* Testimoni
+* Voucher
+* Promo
+
+⸻
+
+PHASE 6 — AI Assistant ⭐
+
+Ini menurut saya yang akan menjadi pembeda HaramainOS.
+
+AI Travel Assistant
+
+Misalnya:
+
+“Ada keluarga 6 orang, kamar yang tersedia 4 dan 2, bagaimana pembagian terbaik?”
+
+AI langsung memberi rekomendasi.
+
+Atau:
+
+“Bus 1 penuh, bus mana yang masih optimal?”
+
+AI langsung menghitung.
+
+Atau:
+
+“Siapa jamaah yang dokumennya belum lengkap?”
+
+AI menjawab tanpa admin harus mencari manual.
+
+Bahkan nanti:
+
+“Buatkan pembagian kamar terbaik.”
+
+AI langsung menghasilkan draft.
+
+⸻
+
+PHASE 7 — Business Intelligence
+
+* Dashboard Owner
+* Profit per Paket
+* Profit per Musim
+* Occupancy Hotel
+* Seat Utilization
+* Family Analytics
+* Jamaah Repeat Order
+* Marketing Analytics
+* KPI Travel
+
+⸻
+
+Target HaramainOS
+
+Saya ingin HaramainOS berkembang menjadi:
+
+Platform SaaS Travel Umrah & Haji yang mengelola seluruh proses bisnis travel, mulai dari pendaftaran jamaah, pengelolaan keluarga, operasional keberangkatan, keuangan, keamanan data, hingga analitik bisnis dan AI Assistant dalam satu ekosistem.
+
+Dengan roadmap seperti ini, kita tidak hanya membuat aplikasi booking umrah, tetapi membangun Travel Operating System (Travel OS) yang benar-benar menjadi “otak operasional” sebuah perusahaan travel. Ini juga akan menjadi fondasi yang kuat jika nanti ingin menambah modul lain seperti CRM, HRD, Inventory, hingga Marketplace Umrah tanpa perlu mengubah arsitektur dasar. Bismillah, kita kejar satu per satu sampai menjadi produk kelas internasional.⭐⭐⭐⭐

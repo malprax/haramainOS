@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:haramain_os/modules/bookings/admin_requests/admin_booking_request_binding.dart';
 import 'package:haramain_os/modules/bookings/admin_requests/admin_booking_request_view.dart';
+import 'package:haramain_os/modules/families/admin/admin_family_binding.dart';
+import 'package:haramain_os/modules/families/admin/admin_family_view.dart';
+import 'package:haramain_os/modules/groups/admin/admin_group_binding.dart';
+import 'package:haramain_os/modules/groups/admin/admin_group_view.dart';
 import 'package:haramain_os/modules/notifications/admin/admin_notification_binding.dart';
 import 'package:haramain_os/modules/notifications/admin/admin_notification_view.dart';
 import 'package:haramain_os/modules/notifications/jamaah/jamaah_notification_binding.dart';
@@ -150,6 +154,24 @@ class AppPages {
       name: AppRoutes.adminBookingRequests,
       page: () => const AdminBookingRequestView(),
       binding: AdminBookingRequestBinding(),
+    ),
+
+    // ==========================================================
+    // ADMIN GROUPS
+    // ==========================================================
+    GetPage(
+      name: AppRoutes.adminGroups,
+      page: () => const AdminGroupView(),
+      binding: AdminGroupBinding(),
+    ),
+
+    // ==========================================================
+    // ADMIN FAMILIES
+    // ==========================================================
+    GetPage(
+      name: AppRoutes.adminFamilies,
+      page: () => const AdminFamilyView(),
+      binding: AdminFamilyBinding(),
     ),
   ];
 }

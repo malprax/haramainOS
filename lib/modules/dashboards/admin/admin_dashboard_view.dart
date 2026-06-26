@@ -181,6 +181,16 @@ class AdminDashboardView extends GetView<AdminDashboardController> {
           icon: Icons.folder_copy,
           onTap: () => Get.toNamed(AppRoutes.adminDocuments),
         ),
+        _MenuCard(
+          title: 'Group',
+          icon: Icons.groups,
+          onTap: () => Get.toNamed(AppRoutes.adminGroups),
+        ),
+        _MenuCard(
+          title: 'Family',
+          icon: Icons.family_restroom,
+          onTap: () => Get.toNamed(AppRoutes.adminFamilies),
+        ),
         _MenuCard(title: 'Jamaah', icon: Icons.people, onTap: () {}),
         _MenuCard(title: 'Mutawwif', icon: Icons.location_pin, onTap: () {}),
         _MenuCard(title: 'Broadcast', icon: Icons.campaign, onTap: () {}),

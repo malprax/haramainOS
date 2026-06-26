@@ -70,4 +70,9 @@ abstract class AppRoutes {
   // ADMIN BOOKING REQUESTS
   // ==========================================================
   static const adminBookingRequests = '/admin-booking-requests';
+
+  // ==========================================================
+  // FAMILIES
+  // ==========================================================
+  static const adminFamilies = '/admin-families';
 }
